@@ -1,41 +1,59 @@
-import { BookOpen, Printer, Clock, Scale, ArrowRight } from "lucide-react";
+import { BookOpen, Printer, Clock, Scale, Phone, Home, ArrowRight } from "lucide-react";
 
 const articles = [
   {
     icon: Scale,
     category: "Prawo",
+    urgent: false,
     title: "Przedawnienie długu — po ilu latach możesz przestać płacić?",
     description:
-      "Stary dług to często dług martwy. Sprawdź dokładnie kiedy Twój dług się przedawnił i co to oznacza w praktyce.",
+      "Chwilówka przedawnia się po 3 latach. Kredyt hipoteczny po 6. Ale uważaj — nawet 10 zł wpłaty lub prośba o ugodę restartuje licznik od zera.",
     time: "5 min czytania",
-    href: "#",
+  },
+  {
+    icon: Phone,
+    category: "Windykacja",
+    urgent: false,
+    title: "Windykator 3-osobowej firmy grozi wizytą terenową. To blef.",
+    description:
+      "Firma zatrudniająca 2-12 osób fizycznie nie ma pracowników w całej Polsce. Sprawdź jak odróżnić blef od realnego zagrożenia.",
+    time: "4 min czytania",
+  },
+  {
+    icon: Home,
+    category: "Prawa dłużnika",
+    urgent: false,
+    title: "Co może windykator, a co komornik? Fundamentalna różnica.",
+    description:
+      "Windykator nie może wejść do mieszkania, zająć mienia ani zaglądać na konto. Tylko komornik z tytułem wykonawczym ma te uprawnienia.",
+    time: "4 min czytania",
   },
   {
     icon: Printer,
     category: "Poradnik",
+    urgent: false,
     title: "Jak wydrukować pismo jeśli nie masz drukarki?",
     description:
-      "Krok po kroku: przelej plik na pendrive, wyślij emailem do Biedronki lub znajdź punkt ksero. Zdjęcia, adres, cena.",
+      "Krok po kroku: przelej plik na pendrive lub wyślij emailem. Punkty ksero w Biedronce, salonikach prasowych i bibliotekach. Koszt od 20 gr za stronę.",
     time: "3 min czytania",
-    href: "#",
   },
   {
     icon: Clock,
     category: "Pilne",
-    title: "Komornik zajął mi konto — co mogę zrobić w 24 godziny?",
+    urgent: true,
+    title: "Komornik zajął mi konto — mam prawa w ciągu 24 godzin",
     description:
-      "Masz prawa nawet po zajęciu konta. Minimalna kwota wolna od zajęcia, wniosek o ograniczenie — wszystko tu.",
+      "Kwota wolna od zajęcia: minimalne wynagrodzenie (pełna kwota). Świadczenia 500+, alimenty i zasiłki są całkowicie chronione przed komornikiem.",
     time: "4 min czytania",
-    href: "#",
   },
   {
     icon: BookOpen,
-    category: "Podstawy",
-    title: "Windykator a komornik — jaka jest różnica?",
+    category: "Zaawansowane",
+    urgent: false,
+    title: "Cesja długu to często prezent, nie powód do paniki",
     description:
-      "Windykator nie ma żadnych uprawnień prawnych. Komornik — ma. Wiedz kto do Ciebie pisze i co może zrobić.",
-    time: "4 min czytania",
-    href: "#",
+      "Gdy fundusz kupuje Twój dług, często nie ma oryginalnych dokumentów umowy. W sądzie to ON musi udowodnić że dług istnieje. Często nie może.",
+    time: "6 min czytania",
   },
 ];
 
@@ -51,6 +69,9 @@ export default function KnowledgeSection() {
             <h2 className="text-2xl sm:text-4xl font-extrabold text-stone-900">
               Wiedza, która chroni
             </h2>
+            <p className="text-stone-500 text-base mt-2 max-w-md">
+              To co windykatorzy wolą żebyś nie wiedział. Napisane po ludzku.
+            </p>
           </div>
           <a
             href="#wszystkie-artykuly"
@@ -60,28 +81,31 @@ export default function KnowledgeSection() {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {articles.map((a) => {
             const Icon = a.icon;
             return (
               <a
                 key={a.title}
-                href={a.href}
-                className="group bg-white rounded-2xl border border-stone-100 p-6 hover:shadow-lg hover:border-teal-100 transition-all duration-300 flex gap-4"
+                href="#"
+                className="group bg-white rounded-2xl border border-stone-100 p-5 hover:shadow-lg hover:border-teal-100 transition-all duration-300 flex flex-col"
               >
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center flex-shrink-0 group-hover:bg-teal-100 transition-colors">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-teal-600 uppercase tracking-wide mb-1">
-                    {a.category}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-9 h-9 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center group-hover:bg-teal-100 transition-colors">
+                    <Icon className="w-4 h-4" />
                   </div>
-                  <h3 className="font-bold text-stone-900 text-base mb-2 group-hover:text-teal-700 transition-colors leading-snug">
-                    {a.title}
-                  </h3>
-                  <p className="text-stone-500 text-sm leading-relaxed mb-3">{a.description}</p>
-                  <span className="text-xs text-stone-400">{a.time}</span>
+                  <div className="flex items-center gap-2">
+                    {a.urgent && (
+                      <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-semibold">Pilne</span>
+                    )}
+                    <span className="text-xs font-semibold text-teal-600 uppercase tracking-wide">{a.category}</span>
+                  </div>
                 </div>
+                <h3 className="font-bold text-stone-900 text-sm mb-2 group-hover:text-teal-700 transition-colors leading-snug flex-1">
+                  {a.title}
+                </h3>
+                <p className="text-stone-500 text-xs leading-relaxed mb-3">{a.description}</p>
+                <span className="text-xs text-stone-400">{a.time}</span>
               </a>
             );
           })}
