@@ -4,10 +4,10 @@ import { useState } from "react";
 import { Menu, X, Shield } from "lucide-react";
 
 const links = [
-  { label: "Pierwsza Pomoc", href: "#pierwsza-pomoc" },
-  { label: "Mapa Długów", href: "#mapa-dlugow" },
-  { label: "Wiedza", href: "#wiedza" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Pierwsza Pomoc", href: "/#pierwsza-pomoc" },
+  { label: "Generator Pism", href: "/generator-pism" },
+  { label: "Wiedza", href: "/#wiedza" },
+  { label: "Kontakt", href: "/#kontakt" },
 ];
 
 export default function Navigation() {
@@ -39,7 +39,7 @@ export default function Navigation() {
               </a>
             ))}
             <a
-              href="#pierwsza-pomoc"
+              href="/generator-pism"
               className="ml-3 px-5 py-2 bg-orange-500 text-white text-sm font-semibold rounded-xl hover:bg-orange-600 transition-colors shadow-sm"
             >
               Zacznij tutaj
@@ -71,7 +71,7 @@ export default function Navigation() {
             </a>
           ))}
           <a
-            href="#pierwsza-pomoc"
+            href="/generator-pism"
             onClick={() => setOpen(false)}
             className="block mt-2 px-4 py-3 bg-orange-500 text-white text-base font-semibold rounded-xl text-center hover:bg-orange-600 transition-colors"
           >

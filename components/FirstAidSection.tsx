@@ -10,7 +10,7 @@ const cards = [
     description:
       "Wygeneruj pismo cofające zgodę na kontakt telefoniczny. Firma MUSI zaprzestać dzwonić. Zostaje tylko korespondencja listowna. Działa na każdą firmę windykacyjną.",
     cta: "Wygeneruj pismo RODO",
-    href: "#generator-pism",
+    href: "/generator-pism",
     urgent: false,
     stat: "Skuteczność w 24-48h",
   },
@@ -23,7 +23,7 @@ const cards = [
     description:
       "Gotowe pisma prawne: sprzeciw od nakazu zapłaty, wniosek do komornika o ograniczenie zajęcia, wezwanie do zaprzestania nękania. Bezpłatnie, w kilka minut.",
     cta: "Wybierz pismo",
-    href: "#generator-pism",
+    href: "/generator-pism",
     urgent: false,
     stat: "Ponad 12 wzorów pism",
   },
@@ -49,7 +49,7 @@ const cards = [
     description:
       "To nakaz zapłaty z e-Sądu. Masz 14 dni na sprzeciw — inaczej komornik. Sprzeciw jest bezpłatny i prosty. Złożony sprzeciw = fundusz musi udowodnić dług dokumentami. Często nie ma jak.",
     cta: "Złóż sprzeciw — krok po kroku",
-    href: "#epu-sprzeciw",
+    href: "/generator-pism",
     urgent: true,
     stat: "Bezpłatny sprzeciw niszczy ich sprawę",
   },
