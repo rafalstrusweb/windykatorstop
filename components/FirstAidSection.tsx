@@ -36,7 +36,7 @@ const cards = [
     description:
       "Windykator dzwoni? Masz tu gotowe zdania. Jedno zdanie chroni Cię prawnie: nie przyznawaj długu, nie obiecuj wpłat. Nawet 10 zł wpłaty może cofnąć przedawnienie.",
     cta: "Pokaż skrypt",
-    href: "#skrypt-rozmowy",
+    href: "/skrypt-rozmowy",
     urgent: false,
     stat: "Chroni przed uznaniem długu",
   },
@@ -49,7 +49,7 @@ const cards = [
     description:
       "To nakaz zapłaty z e-Sądu. Masz 14 dni na sprzeciw — inaczej komornik. Sprzeciw jest bezpłatny i prosty. Złożony sprzeciw = fundusz musi udowodnić dług dokumentami. Często nie ma jak.",
     cta: "Złóż sprzeciw — krok po kroku",
-    href: "/generator-pism",
+    href: "/epu",
     urgent: true,
     stat: "Bezpłatny sprzeciw niszczy ich sprawę",
   },

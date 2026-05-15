@@ -6,8 +6,8 @@ import { Menu, X, Shield } from "lucide-react";
 const links = [
   { label: "Pierwsza Pomoc", href: "/#pierwsza-pomoc" },
   { label: "Generator Pism", href: "/generator-pism" },
+  { label: "Skrypt Rozmowy", href: "/skrypt-rozmowy" },
   { label: "Wiedza", href: "/#wiedza" },
-  { label: "Kontakt", href: "/#kontakt" },
 ];
 
 export default function Navigation() {
