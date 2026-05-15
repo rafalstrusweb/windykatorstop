@@ -7,7 +7,7 @@ const links = [
   { label: "Pierwsza Pomoc", href: "/#pierwsza-pomoc" },
   { label: "Generator Pism", href: "/generator-pism" },
   { label: "Skrypt Rozmowy", href: "/skrypt-rozmowy" },
-  { label: "Wiedza", href: "/#wiedza" },
+  { label: "Wiedza", href: "/wiedza" },
 ];
 
 export default function Navigation() {

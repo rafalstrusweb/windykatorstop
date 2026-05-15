@@ -2,16 +2,34 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WindykatorStop.pl — Bezpłatna pomoc dla osób zadłużonych",
+  metadataBase: new URL("https://windykatorstop.pl"),
+  title: {
+    default: "WindykatorStop.pl — Bezpłatna pomoc dla osób zadłużonych",
+    template: "%s | WindykatorStop.pl",
+  },
   description:
-    "Zatrzymaj nękanie przez windykatorów. Darmowe pisma, skrypty rozmów, pomoc przy EPU i mapa długów. Krok po kroku, bez oceniania.",
-  keywords: "windykator, dług, zadłużenie, EPU, sprzeciw, pismo, cofnięcie zgód, komornik",
+    "Zatrzymaj nękanie przez windykatorów. Darmowe pisma, skrypty rozmów, pomoc przy EPU i kalkulator przedawnienia. Krok po kroku, bez oceniania.",
+  keywords: [
+    "windykator", "dług", "zadłużenie", "EPU", "sprzeciw od nakazu zapłaty",
+    "pismo do windykatora", "cofnięcie zgód", "komornik", "przedawnienie długu",
+    "upadłość konsumencka", "RODO windykacja", "windykator a komornik",
+  ],
+  authors: [{ name: "WindykatorStop.pl" }],
+  alternates: { canonical: "https://windykatorstop.pl" },
   openGraph: {
     title: "WindykatorStop.pl — Bezpłatna pomoc dla osób zadłużonych",
     description: "Dług to problem do rozwiązania, a nie wyrok. Bezpłatne narzędzia które pomogą Ci odzyskać spokój.",
+    url: "https://windykatorstop.pl",
+    siteName: "WindykatorStop.pl",
     locale: "pl_PL",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "WindykatorStop.pl",
+    description: "Bezpłatne narzędzia dla osób zadłużonych.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
