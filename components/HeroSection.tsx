@@ -60,10 +60,10 @@ export default function HeroSection() {
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
           <a
-            href="#pierwsza-pomoc"
+            href="/ekspertyza"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-orange-500 text-white text-lg font-bold px-8 py-4 rounded-2xl hover:bg-orange-600 active:scale-95 transition-all shadow-lg shadow-orange-200"
           >
-            Zacznij tutaj — za darmo
+            Bezplatna ekspertyza w 2 min
             <ArrowRight className="w-5 h-5" />
           </a>
           <a

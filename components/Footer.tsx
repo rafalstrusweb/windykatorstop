@@ -3,7 +3,7 @@ import { Shield, Heart } from "lucide-react";
 const links = {
   "Narzędzia": ["Generator Pism", "Skrypt Rozmowy", "Sprawa EPU", "Mapa Długów"],
   "Wiedza": ["Przedawnienie długu", "Windykator vs Komornik", "Jak drukować bez drukarki", "Prawa dłużnika"],
-  "Wsparcie": ["Bezpłatne kliniki prawne", "Kontakt", "O projekcie", "Polityka prywatności"],
+  "Wsparcie": ["Bezpłatna ekspertyza", "Bezpłatne kliniki prawne", "Dla prawników", "Polityka prywatności"],
 };
 
 export default function Footer() {

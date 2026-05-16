@@ -12,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/skrypt-rozmowy`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/epu`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/wiedza`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE}/ekspertyza`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
+    { url: `${BASE}/dla-prawnikow`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
 
   const articlePages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
