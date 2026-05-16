@@ -29,6 +29,7 @@ const sections = [
       { label: "Fundacja Togatus", href: "https://fundacja.togatus.pl", external: true },
       { label: "Dla prawników", href: "/dla-prawnikow" },
       { label: "Praca dla wychodzących z długów", href: "/praca" },
+      { label: "Polityka prywatności", href: "/prywatnosc" },
     ],
   },
 ];
@@ -51,8 +52,12 @@ export default function Footer() {
             <p className="text-sm text-stone-400 leading-relaxed mb-4">
               Bezpłatna pomoc dla osób w pętli zadłużenia. Bez oceniania, bez rejestracji, zawsze dostępna.
             </p>
-            <div className="text-xs text-stone-500">
+            <div className="text-xs text-stone-500 mb-2">
               Projekt non-profit. Nie jesteśmy kancelarią prawną.
+            </div>
+            <div className="text-xs text-stone-600 flex items-center gap-1.5">
+              <span className="text-teal-400">🔒</span>
+              Zero ciasteczek śledzących. <Link href="/prywatnosc" className="underline hover:text-teal-400">Polityka prywatności</Link>
             </div>
           </div>
 

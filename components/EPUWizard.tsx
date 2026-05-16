@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AlertTriangle, CheckCircle2, Clock, FileText, Send, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { Events } from "@/lib/track";
 
 // ─── Deadline calculator ───────────────────────────────────────────────────────
 
@@ -38,6 +39,10 @@ export default function EPUWizard() {
   const [isEPU, setIsEPU] = useState<boolean | null>(null);
 
   const deadline = deliveryDate ? calcDeadline(deliveryDate) : null;
+
+  useEffect(() => {
+    if (step === 5) Events.epuWizardCompleted();
+  }, [step]);
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">

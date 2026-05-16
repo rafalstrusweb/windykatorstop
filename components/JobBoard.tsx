@@ -7,6 +7,7 @@ import {
   Briefcase, MapPin, Clock, Mail, Phone, Plus, X, Lock,
   CheckCircle2, Filter, ShieldCheck, Heart,
 } from "lucide-react";
+import { Events } from "@/lib/track";
 
 const REGIONS = [
   { val: "all", label: "Wszystkie" },
@@ -192,7 +193,7 @@ function JobCard({ job }: { job: Job }) {
         <div className="flex-shrink-0">
           {!showContact ? (
             <button
-              onClick={() => setShowContact(true)}
+              onClick={() => { setShowContact(true); Events.jobContactRevealed(job.id); }}
               className="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors"
             >
               Pokaż kontakt
@@ -256,7 +257,10 @@ function JobSubmitModal({ onClose }: { onClose: () => void }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      setState(res.ok ? "sent" : "error");
+      if (res.ok) {
+        Events.jobSubmitted(form.region);
+        setState("sent");
+      } else setState("error");
     } catch {
       setState("error");
     }

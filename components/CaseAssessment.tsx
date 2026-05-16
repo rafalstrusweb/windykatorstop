@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Sparkles, ArrowLeft, ArrowRight, CheckCircle2, AlertTriangle,
   Scale, FileText, Phone, Mail, Shield, Lock,
 } from "lucide-react";
+import { Events } from "@/lib/track";
 
 // ─── Question definitions ────────────────────────────────────────────────────
 
@@ -78,6 +79,7 @@ export default function CaseAssessment() {
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   function answer(q: Q, opt: typeof q.options[0]) {
+    if (step === 0) Events.caseAssessmentStarted();
     setAnswers((a) => ({ ...a, [q.id]: { val: opt.val, score: opt.score, label: opt.label } }));
     setTimeout(() => setStep((s) => s + 1), 250);
   }
@@ -88,6 +90,11 @@ export default function CaseAssessment() {
     totalScore <= 7 ? "low" : totalScore <= 13 ? "medium" : "high";
 
   const isResult = step >= QUESTIONS.length;
+
+  // Fire event once when reaching result
+  useEffect(() => {
+    if (isResult) Events.caseAssessmentCompleted(riskLevel);
+  }, [isResult, riskLevel]);
 
   async function submitLead() {
     setSubmitState("sending");
@@ -102,8 +109,10 @@ export default function CaseAssessment() {
           riskLevel,
         }),
       });
-      if (res.ok) setSubmitState("sent");
-      else setSubmitState("error");
+      if (res.ok) {
+        Events.leadSubmitted(riskLevel);
+        setSubmitState("sent");
+      } else setSubmitState("error");
     } catch {
       setSubmitState("error");
     }

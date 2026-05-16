@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Send, Bot, User, Sparkles, Shield } from "lucide-react";
+import { Events } from "@/lib/track";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -82,6 +83,7 @@ export default function AIChatSection() {
 
   async function sendMessage(text: string) {
     if (!text.trim() || loading) return;
+    if (messages.length === 1) Events.aiChatStarted();
     const userMsg: Message = { role: "user", content: text };
     setMessages((m) => [...m, userMsg]);
     setInput("");

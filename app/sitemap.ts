@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/ekspertyza`, lastModified: now, changeFrequency: "monthly", priority: 0.95 },
     { url: `${BASE}/dla-prawnikow`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/praca`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${BASE}/prywatnosc`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const articlePages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({

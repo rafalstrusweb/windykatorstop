@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Scale, CheckCircle2, ArrowRight, Shield, Users, TrendingUp, Lock } from "lucide-react";
+import { Events } from "@/lib/track";
 
 export default function LawyerSignup() {
   const [form, setForm] = useState({
@@ -37,7 +38,10 @@ export default function LawyerSignup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      setState(res.ok ? "sent" : "error");
+      if (res.ok) {
+        Events.lawyerSignup(form.city);
+        setState("sent");
+      } else setState("error");
     } catch {
       setState("error");
     }

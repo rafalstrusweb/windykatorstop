@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Calculator, CheckCircle2, XCircle, AlertCircle, ChevronDown } from "lucide-react";
+import { Events } from "@/lib/track";
 
 const DEBT_TYPES = [
   { value: "chwilowka", label: "Chwilówka / pożyczka pozabankowa", years: 3 },
@@ -41,13 +42,12 @@ export default function StatuteCalculator() {
 
     setExpiryDate(expiry.toLocaleDateString("pl-PL", { day: "numeric", month: "long", year: "numeric" }));
 
-    if (today > expiry) {
-      setResult("przedawniony");
-    } else if (monthsLeft <= 6) {
-      setResult("wkrotce");
-    } else {
-      setResult("aktywny");
-    }
+    let r: "przedawniony" | "wkrotce" | "aktywny";
+    if (today > expiry) r = "przedawniony";
+    else if (monthsLeft <= 6) r = "wkrotce";
+    else r = "aktywny";
+    setResult(r);
+    Events.statuteCalculated(r);
   }
 
   return (

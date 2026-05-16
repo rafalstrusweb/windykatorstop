@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FileText, Printer, ArrowLeft, CheckCircle2, AlertTriangle, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { Events } from "@/lib/track";
 
 // ─── Letter templates ────────────────────────────────────────────────────────
 
@@ -223,6 +224,7 @@ export default function LetterGenerator() {
 
   function tryGenerate() {
     if (formValid) {
+      if (letterId) Events.letterGenerated(letterId);
       setStep("preview");
     } else {
       setShowErrors(true);
