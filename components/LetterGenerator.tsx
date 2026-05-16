@@ -206,6 +206,7 @@ export default function LetterGenerator() {
   const [step, setStep] = useState<"choose" | "form" | "preview">("choose");
   const [letterId, setLetterId] = useState<string>("");
   const [fields, setFields] = useState<Fields>(EMPTY);
+  const [showErrors, setShowErrors] = useState(false);
 
   const letter = LETTERS.find((l) => l.id === letterId);
 
@@ -213,9 +214,25 @@ export default function LetterGenerator() {
     setFields((f) => ({ ...f, [key]: val }));
   }
 
-  const formValid =
-    fields.firstName && fields.lastName && fields.street &&
-    fields.city && fields.zipCode && fields.companyName;
+  // Required fields by letter type
+  const required: (keyof Fields)[] = [
+    "firstName", "lastName", "street", "zipCode", "city", "companyName",
+  ];
+  const missing = required.filter((k) => !String(fields[k]).trim());
+  const formValid = missing.length === 0;
+
+  function tryGenerate() {
+    if (formValid) {
+      setStep("preview");
+    } else {
+      setShowErrors(true);
+      // Scroll to first missing field
+      setTimeout(() => {
+        const firstError = document.querySelector("[data-error='true']");
+        firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 50);
+    }
+  }
 
   const preview = letter ? letter.generate(fields) : "";
 
@@ -310,13 +327,13 @@ export default function LetterGenerator() {
               Twoje dane
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Field label="Imię" value={fields.firstName} onChange={(v) => set("firstName", v)} placeholder="Jan" />
-              <Field label="Nazwisko" value={fields.lastName} onChange={(v) => set("lastName", v)} placeholder="Kowalski" />
+              <Field label="Imię" value={fields.firstName} onChange={(v) => set("firstName", v)} placeholder="Jan" required showError={showErrors} />
+              <Field label="Nazwisko" value={fields.lastName} onChange={(v) => set("lastName", v)} placeholder="Kowalski" required showError={showErrors} />
               <div className="sm:col-span-2">
-                <Field label="Ulica i numer" value={fields.street} onChange={(v) => set("street", v)} placeholder="ul. Kwiatowa 5/10" />
+                <Field label="Ulica i numer" value={fields.street} onChange={(v) => set("street", v)} placeholder="ul. Kwiatowa 5/10" required showError={showErrors} />
               </div>
-              <Field label="Kod pocztowy" value={fields.zipCode} onChange={(v) => set("zipCode", v)} placeholder="00-001" />
-              <Field label="Miejscowość" value={fields.city} onChange={(v) => set("city", v)} placeholder="Warszawa" />
+              <Field label="Kod pocztowy" value={fields.zipCode} onChange={(v) => set("zipCode", v)} placeholder="00-001" required showError={showErrors} />
+              <Field label="Miejscowość" value={fields.city} onChange={(v) => set("city", v)} placeholder="Warszawa" required showError={showErrors} />
             </div>
           </div>
 
@@ -326,9 +343,9 @@ export default function LetterGenerator() {
               Dane firmy windykacyjnej / wierzyciela
             </h2>
             <div className="space-y-3">
-              <Field label="Nazwa firmy" value={fields.companyName} onChange={(v) => set("companyName", v)} placeholder="np. KRUK SA, Link Financial, DeltaWise..." />
-              <Field label="Adres firmy (ulica)" value={fields.companyStreet} onChange={(v) => set("companyStreet", v)} placeholder="ul. Przykładowa 1" />
-              <Field label="Miejscowość firmy" value={fields.companyCity} onChange={(v) => set("companyCity", v)} placeholder="Wrocław" />
+              <Field label="Nazwa firmy" value={fields.companyName} onChange={(v) => set("companyName", v)} placeholder="np. KRUK SA, Link Financial, DeltaWise..." required showError={showErrors} />
+              <Field label="Adres firmy (ulica)" value={fields.companyStreet} onChange={(v) => set("companyStreet", v)} placeholder="ul. Przykładowa 1 (opcjonalnie)" />
+              <Field label="Miejscowość firmy" value={fields.companyCity} onChange={(v) => set("companyCity", v)} placeholder="Wrocław (opcjonalnie)" />
             </div>
             <p className="text-xs text-stone-400 mt-2">
               Adres znajdziesz w piśmie od windykatora lub na ich stronie internetowej.
@@ -378,10 +395,19 @@ export default function LetterGenerator() {
             </div>
           )}
 
+          {showErrors && !formValid && (
+            <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-4 flex gap-3">
+              <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-red-800">
+                <strong>Wypełnij wszystkie pola oznaczone gwiazdką (*).</strong>
+                <p className="text-red-700 mt-0.5">Brakuje {missing.length} {missing.length === 1 ? "pola" : "pól"}. Sprawdź formularz powyżej — czerwone ramki wskazują puste pola.</p>
+              </div>
+            </div>
+          )}
+
           <button
-            onClick={() => setStep("preview")}
-            disabled={!formValid}
-            className="w-full bg-teal-600 text-white font-bold py-4 rounded-2xl hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all active:scale-95"
+            onClick={tryGenerate}
+            className="w-full bg-teal-600 text-white font-bold py-4 rounded-2xl hover:bg-teal-700 transition-all active:scale-95"
           >
             Generuj pismo →
           </button>
@@ -526,20 +552,34 @@ export default function LetterGenerator() {
 // ─── Field helper ────────────────────────────────────────────────────────────
 
 function Field({
-  label, value, onChange, placeholder,
+  label, value, onChange, placeholder, required, showError,
 }: {
-  label: string; value: string; onChange: (v: string) => void; placeholder?: string;
+  label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; required?: boolean; showError?: boolean;
 }) {
+  const isEmpty = !value.trim();
+  const hasError = required && showError && isEmpty;
+
   return (
-    <div>
-      <label className="block text-xs font-semibold text-stone-600 mb-1">{label}</label>
+    <div data-error={hasError ? "true" : "false"}>
+      <label className="block text-xs font-semibold text-stone-600 mb-1">
+        {label}
+        {required && <span className="text-red-500 ml-0.5">*</span>}
+      </label>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm text-stone-900 placeholder-stone-300 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all"
+        className={`w-full rounded-xl px-3 py-2.5 text-sm text-stone-900 placeholder-stone-300 focus:outline-none focus:ring-2 transition-all border-2 ${
+          hasError
+            ? "bg-red-50 border-red-300 focus:ring-red-300"
+            : "bg-stone-50 border-stone-200 focus:ring-teal-400 focus:border-transparent"
+        }`}
       />
+      {hasError && (
+        <p className="text-xs text-red-600 mt-1">To pole jest wymagane</p>
+      )}
     </div>
   );
 }
