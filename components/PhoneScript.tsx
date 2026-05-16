@@ -158,6 +158,13 @@ export default function PhoneScript() {
           </div>
         </div>
 
+        <div className="bg-stone-100 border border-stone-200 rounded-2xl p-3 mb-4 text-xs text-stone-600 flex items-start gap-2">
+          <span className="flex-shrink-0">📱</span>
+          <div>
+            <strong className="text-stone-800">Wskazowka:</strong> Dodaj te strone do ekranu glownego telefonu (Chrome: menu → &quot;Dodaj do ekranu glownego&quot;; iPhone: Udostepnij → &quot;Dodaj do ekranu glownego&quot;). Skrypt bedzie dziala bez internetu, gotowy do uzycia w kazdej chwili.
+          </div>
+        </div>
+
         <div className="bg-red-50 border border-red-200 rounded-2xl p-4 mb-6">
           <p className="text-sm font-bold text-red-800 mb-1 flex items-center gap-2">
             <AlertTriangle className="w-4 h-4" />
