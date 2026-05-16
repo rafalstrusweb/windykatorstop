@@ -160,7 +160,7 @@ export default function StatuteCalculator() {
                     <p>✓ NIE płać żadnych kwot — wpłata ożywi dług</p>
                     <p>✓ NIE podpisuj ugód — skonsultuj z prawnikiem</p>
                   </div>
-                  <a href="#kontakt" className="mt-3 inline-block text-sm text-green-700 font-semibold underline">
+                  <a href="/#pomoc-prawna" className="mt-3 inline-block text-sm text-green-700 font-semibold underline">
                     Skonsultuj z bezpłatną kliniką prawną →
                   </a>
                 </div>
@@ -194,10 +194,10 @@ export default function StatuteCalculator() {
                     Skup się teraz na innych narzędziach obrony.
                   </p>
                   <div className="flex gap-2 flex-wrap">
-                    <a href="#pierwsza-pomoc" className="text-sm bg-teal-600 text-white px-4 py-2 rounded-xl font-semibold hover:bg-teal-700">
+                    <a href="/generator-pism" className="text-sm bg-teal-600 text-white px-4 py-2 rounded-xl font-semibold hover:bg-teal-700">
                       Zatrzymaj telefony (RODO)
                     </a>
-                    <a href="#ai-chat" className="text-sm bg-white border border-stone-200 text-stone-700 px-4 py-2 rounded-xl font-semibold hover:bg-stone-50">
+                    <a href="/#ai-chat" className="text-sm bg-white border border-stone-200 text-stone-700 px-4 py-2 rounded-xl font-semibold hover:bg-stone-50">
                       Zapytaj asystenta AI
                     </a>
                   </div>
@@ -209,7 +209,7 @@ export default function StatuteCalculator() {
 
         <p className="text-center text-xs text-stone-400 mt-5">
           Kalkulator daje orientację — nie zastąpi porady prawnika. W ważnych sprawach skonsultuj się z{" "}
-          <a href="#kontakt" className="underline hover:text-teal-600">bezpłatną kliniką prawną</a>.
+          <a href="/#pomoc-prawna" className="underline hover:text-teal-600">bezpłatną kliniką prawną</a>.
         </p>
       </div>
     </section>

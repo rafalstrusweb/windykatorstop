@@ -223,7 +223,7 @@ export default function AIChatSection() {
 
         <p className="text-center text-xs text-stone-400 mt-4">
           Asystent AI może popełniać błędy. Przy ważnych decyzjach skonsultuj się z prawnikiem lub{" "}
-          <a href="#kontakt" className="underline hover:text-teal-600">
+          <a href="/#pomoc-prawna" className="underline hover:text-teal-600">
             bezpłatną kliniką prawną
           </a>
           .
