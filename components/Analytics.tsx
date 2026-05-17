@@ -1,25 +1,22 @@
 // Plausible Analytics — cookieless, privacy-friendly.
-// Disabled if NEXT_PUBLIC_PLAUSIBLE_DOMAIN is not set (e.g. local dev).
+// Uses account-specific script (new Plausible format with unique script ID).
+// To disable analytics (e.g. in dev), set NEXT_PUBLIC_DISABLE_ANALYTICS=true.
 
 import Script from "next/script";
 
-export default function Analytics() {
-  const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-  const host = process.env.NEXT_PUBLIC_PLAUSIBLE_HOST || "https://plausible.io";
+const DEFAULT_SCRIPT = "https://plausible.io/js/pa-HdNjeLgFVODFFquo30T4-.js";
 
-  if (!domain) return null;
+export default function Analytics() {
+  if (process.env.NEXT_PUBLIC_DISABLE_ANALYTICS === "true") return null;
+
+  // Allow overriding the script via env var (e.g. self-hosted Plausible)
+  const scriptSrc = process.env.NEXT_PUBLIC_PLAUSIBLE_SCRIPT || DEFAULT_SCRIPT;
 
   return (
     <>
-      <Script
-        defer
-        data-domain={domain}
-        src={`${host}/js/script.tagged-events.js`}
-        strategy="afterInteractive"
-      />
-      {/* Custom event helper attached to window */}
+      <Script async src={scriptSrc} strategy="afterInteractive" />
       <Script id="plausible-init" strategy="afterInteractive">
-        {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
+        {`window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init();`}
       </Script>
     </>
   );
